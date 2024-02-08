@@ -1,0 +1,118 @@
+.container{
+	display: grid;
+	padding-top:60px ;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 964px;
+	height: 730px;
+	border-radius: 15px;
+	background: rgb(255, 255, 255);
+}
+
+.title{
+	color: rgb(9, 31, 91);
+	font-family: 'Roboto';
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 42px;
+	letter-spacing: 0%;
+	text-align: center;
+}
+
+.user-name{
+	width: 676px;
+	height: 102px;
+	margin: 0 auto;
+}
+
+.user-name__text{
+	color: rgb(95, 109, 148);
+	font-family: 'Roboto';
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 28px;
+	letter-spacing: 0%;
+	text-align: left;
+	margin-bottom: 15px;
+}
+
+.user-name__main{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 70px;
+	padding: 0 20px;
+	border-radius: 15px;
+	background-color: rgb(244, 248, 254);
+}
+
+.user-name__input{
+	width: 100%;
+	color: rgb(95, 109, 148);
+	font-family: 'Roboto';
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 28px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.user-mail{
+	width: 676px;
+	height: 102px;
+	margin: 0 auto;
+}
+
+.user-mail__text{
+	color: rgb(95, 109, 148);
+	font-family: 'Roboto';
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 28px;
+	letter-spacing: 0%;
+	text-align: left;
+	margin-bottom: 15px;
+}
+
+.user-mail__main{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 70px;
+	padding: 0 20px;
+	border-radius: 15px;
+	background-color: rgb(244, 248, 254);
+}
+
+.user-mail__input{
+	width: 100%;
+	color: rgb(95, 109, 148);
+	font-family: 'Roboto';
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 28px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.container-btn{
+   margin-top: 25px;
+   text-align: center;
+}
+
+.btn{
+	width: 314px;
+	height: 78px;
+	margin: 0 auto;
+	border-radius: 15px;
+	background: rgb(9, 31, 91);
+	color: rgb(255, 255, 255);
+	font-family: 'Roboto';
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 38px;
+	letter-spacing: 0%;
+	text-transform: capitalize;
+}

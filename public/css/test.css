@@ -1,0 +1,143 @@
+.container{
+	display: grid;
+	justify-content: center;
+}
+
+.title{
+	margin: 60px auto 65px auto;
+	text-align: center;
+}
+
+.text-upper{
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 28px;
+	letter-spacing: 0%;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.text-under{
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 32px;
+	font-weight: 500;
+	line-height: 38px;
+	letter-spacing: 0%;
+	text-align: center;
+}
+
+.test{
+	display: grid;
+	gap: 20px;
+	max-height: 60vh;
+	border-radius: 15px;
+	padding: 0 25px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	margin-bottom: 73px;
+}
+
+.test::-webkit-scrollbar{
+	width: 10px;
+	border-radius: 35px;
+	background: rgb(245, 245, 245);
+	
+}
+
+.test::-webkit-scrollbar-thumb{
+	border-radius: 35px;
+	background: rgb(9, 31, 91);
+}
+
+.example{
+	display: grid;
+	gap: 25px;
+	padding: 25px;
+	background: rgb(255, 255, 255);
+	margin-bottom: 25px;
+	border-radius: 15px;
+}
+
+.test__question{
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 28px;
+	font-weight: 400;
+	line-height: 33px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.test__answer{
+	display: flex;
+	width: 834px;
+	height: 55px;
+	border-radius: 15px;
+	background: rgb(244, 248, 254);
+	padding: 0 20px;
+}
+
+.test__answer-radio{
+display: grid;
+}
+
+.test__answer-radio input[type=radio] {
+	display: none;
+}
+.test__answer-radio label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding: 5px 0px 0px 30px;
+	user-select: none;
+}
+.test__answer-radio label:before {
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	background: url(/img/unchecked-radio.svg) 0 0 no-repeat;
+}
+ 
+.test__answer-radio input[type=radio]:checked + label:before {
+	background: url(/img/checked-radio.svg) 0 0 no-repeat;
+}
+
+.test__input{
+	width: 100%;
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 23px;
+	letter-spacing: 0%;
+}
+
+.test__label{
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 23px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.btn{
+	margin: 0 auto 60px auto;
+	width: 319px;
+	height: 78px;
+	border-radius: 15px;
+	background: rgb(9, 31, 91);
+	color: rgb(255, 255, 255);
+	font-family: Roboto;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 38px;
+	letter-spacing: 0%;
+}

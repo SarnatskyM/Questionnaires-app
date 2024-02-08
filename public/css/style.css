@@ -1,0 +1,28 @@
+@import url("reset.css");
+
+@font-face{
+	font-family: 'Roboto' ;
+	src: url(/fonts/roboto/Roboto-Light.ttf) format(truetype) ;
+	font-weight: 300;
+}
+
+@font-face{
+	font-family: 'Roboto' ;
+	src: url(/fonts/roboto/Roboto-Regular.ttf) format(truetype) ;
+	font-weight: 400;
+}
+@font-face{
+	font-family: 'Roboto' ;
+	src: url(/fonts/roboto/Roboto-Medium.ttf) format(truetype) ;
+	font-weight: 500;
+}
+
+body{
+	background: rgb(224, 237, 255);
+}
+
+form{
+    margin-block-end: 0;
+    display: block;
+}
+

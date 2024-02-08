@@ -1,0 +1,25 @@
+.container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 629px;
+	height: 142px;
+	border-radius: 15px;
+	background: rgb(255, 255, 255);
+}
+
+.finish{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	color: rgb(9, 31, 91);
+	font-family: Roboto;
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 42px;
+	letter-spacing: 0%;
+	
+    
+}
