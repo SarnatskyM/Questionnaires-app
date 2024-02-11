@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -47,7 +48,7 @@ class QuestionResource extends Resource
                             ->label('Тест')
                             ->columnSpanFull()
                             ->required(),
-                        
+
                         RichEditor::make('question_text')
                             ->label('Вопрос')
                             ->columnSpanFull()
@@ -61,11 +62,14 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('test_id')->label('Тест'),
-                TextColumn::make('question_text')->label('Вопрос')
+                TextColumn::make('test.title')->label('Тест'),
+                TextColumn::make('question_text')->wrap()->html()->label('Вопрос')
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label('Анкета')
+                    ->options(Test::all()->pluck('title', 'id'))
+                    ->attribute('test_id')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

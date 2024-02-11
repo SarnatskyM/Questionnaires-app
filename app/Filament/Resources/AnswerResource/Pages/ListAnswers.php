@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AnswerResource\Pages;
 
 use App\Filament\Resources\AnswerResource;
+use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -16,5 +17,13 @@ class ListAnswers extends ListRecords
             // Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsOverview::class,
+        ];
+    }
+
     
 }

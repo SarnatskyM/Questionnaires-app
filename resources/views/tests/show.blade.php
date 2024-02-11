@@ -7,7 +7,7 @@
     <div class="container">
         <div class="title">
             <p class="text-upper">{{ $test->title }}</p>
-            <p class="text-under">{{ $test->description }}</p>
+            <p class="text-under">{!! $test->description !!}</p>
         </div>
         <div class="test">
             @foreach ($test->questions as $question)

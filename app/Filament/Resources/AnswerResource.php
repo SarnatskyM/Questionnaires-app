@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AnswerResource\Pages;
 use App\Filament\Resources\AnswerResource\RelationManagers;
+use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
 use App\Models\Answer;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -14,6 +15,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -52,6 +54,7 @@ class AnswerResource extends Resource
                 TextColumn::make('respondent.email')
                     ->label('Респодент'),
                 TextColumn::make('question.question_text')
+                    ->html()
                     ->label('Вопрос'),
                 TextColumn::make('answer_text')
                     ->label('Ответ')
@@ -79,6 +82,14 @@ class AnswerResource extends Resource
             //
         ];
     }
+
+    public static function getWidgets(): array
+    {
+        return [
+            StatsOverview::class,
+        ];
+    }
+
 
     public static function getPages(): array
     {

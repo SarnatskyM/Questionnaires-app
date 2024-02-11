@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\AnswerResource\Widgets\StatsChart;
+use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
+use App\Filament\Resources\AnswerResource\Widgets\StatsSecondChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -37,7 +40,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                StatsOverview::class,
+                StatsChart::class,
+                StatsSecondChart::class
             ])
             ->middleware([
                 EncryptCookies::class,

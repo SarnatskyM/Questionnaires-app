@@ -58,8 +58,8 @@ class TestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->label('Название'),
-                TextColumn::make('description')->label('Описание')
+                TextColumn::make('title')->searchable()->label('Название'),
+                TextColumn::make('description')->html()->wrap()->label('Описание')
             ])
             ->filters([
                 //
