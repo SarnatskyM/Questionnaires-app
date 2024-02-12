@@ -18,6 +18,12 @@
 	text-align: center;
 	margin-bottom: 20px;
 }
+
+.test__label{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
 .text-under{
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
@@ -79,6 +85,11 @@
 	padding: 0 20px;
 }
 
+.test__text{
+    display: flex;
+    align-items: center;
+}
+
 .test__answer-radio{
 display: grid;
 }
@@ -109,7 +120,6 @@ display: grid;
 }
 
 .test__input{
-	width: 100%;
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
 	font-size: 20px;

@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AnswerResource\Pages;
-use App\Filament\Resources\AnswerResource\RelationManagers;
 use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
 use App\Models\Answer;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +13,6 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnswerResource extends Resource
 {
@@ -25,15 +20,15 @@ class AnswerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $label = "Ответ";
+    protected static ?string $label = "Результат";
 
-    protected static ?string $modelLabel = "Ответ";
+    protected static ?string $modelLabel = "Результат";
 
-    protected static ?string $pluralLabel = "Ответы";
+    protected static ?string $pluralLabel = "Результаты";
 
-    protected static ?string $pluralModelLabel = "Ответы";
+    protected static ?string $pluralModelLabel = "Результаты";
 
-    protected static ?string $navigationGroup = 'Общее';
+    protected static ?string $navigationGroup = 'Вывод';
 
     protected static ?int $navigationSort = 4;
 
@@ -51,12 +46,12 @@ class AnswerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('respondent.email')
-                    ->label('Респодент'),
+                TextColumn::make('test.title')
+                    ->label('Название теста'),
                 TextColumn::make('question.question_text')
                     ->html()
                     ->label('Вопрос'),
-                TextColumn::make('answer_text')
+                TextColumn::make('option.option_text')
                     ->label('Ответ')
             ])
             ->filters([
@@ -79,7 +74,7 @@ class AnswerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            
         ];
     }
 

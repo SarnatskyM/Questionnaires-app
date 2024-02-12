@@ -14,8 +14,12 @@ class TestController extends Controller
         return view('tests.index', compact('tests'));
     }
 
-    public function show(Test $test)
+    public function show($slug)
     {
+        $test = Test::where('slug', $slug)->firstOrFail();
+        if($test->is_active == 0){
+            abort(404);
+        }
         return view('tests.show', compact('test'));
     }
 
@@ -23,13 +27,11 @@ class TestController extends Controller
     {
         foreach ($request->input('answers') as $question_id => $answer_text) {
             $answer = new Answer();
-            $answer->respondent_id = auth()->id(); 
+            $answer->test_id = $test->id; 
             $answer->question_id = $question_id;
-            $answer->answer_text = $answer_text;
+            $answer->option_id = $answer_text;
             $answer->save();
         }
-
-
         return redirect('/success');
     }
 

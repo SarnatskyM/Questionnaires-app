@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TestResource\Pages;
-use App\Filament\Resources\TestResource\RelationManagers;
 use App\Models\Test;
-use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -14,8 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Toggle;
 
 class TestResource extends Resource
 {
@@ -32,7 +29,7 @@ class TestResource extends Resource
     protected static ?string $pluralModelLabel = "Тесты";
 
     protected static ?string $navigationGroup = 'Общее';
-    
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -48,6 +45,16 @@ class TestResource extends Resource
 
                         RichEditor::make('description')
                             ->label('Описание')
+                            ->columnSpanFull(),
+
+                        TextInput::make('slug')
+                            ->label('Уникальный URL')
+                            ->required()
+                            ->columnSpanFull(),
+
+                        Toggle::make('is_active')
+                            ->label('Активировать')
+                            ->default(false)
                             ->columnSpanFull()
                     ]
                 )
@@ -59,7 +66,9 @@ class TestResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->searchable()->label('Название'),
-                TextColumn::make('description')->html()->wrap()->label('Описание')
+                TextColumn::make('description')->html()->wrap()->label('Описание'),
+                TextColumn::make('slug')->searchable()->label('Уникальный URL'),
+                TextColumn::make('is_active')->label('Активировать')
             ])
             ->filters([
                 //

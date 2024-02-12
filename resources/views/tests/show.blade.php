@@ -15,10 +15,14 @@
                     <div class="test__question">
                         <p>{!! $question->question_text !!}</p>
                     </div>
-                    <div class="test__answer">
-                        <input class="test__input" type="text"
-                            name="answers[{{ $question->id }}] required placeholder="Ответ">
-                    </div>
+                    @foreach ($question->options as $option)
+                        <div class="test__answer">
+                            <label class="test__label">
+                                <input class="test__input" type="radio" name="answers[{{ $question->id }}]" value="{{ $option->id }}">
+                                <span class="test__text">{!! $option->option_text !!}</span>
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
             @endforeach
         </div>

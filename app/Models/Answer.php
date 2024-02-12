@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['respondent_id', 'question_id', 'answer_text'];
+    protected $fillable = ['test_id', 'question_id', 'option_id'];
 
     // Ответ принадлежит к одному вопросу
     public function question()
@@ -17,7 +17,14 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function respondent(){
-        return $this->belongsTo(Respondent::class);
+
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
+
+    public function option()
+    {
+        return $this->belongsTo(Option::class);
     }
 }
