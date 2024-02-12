@@ -9,6 +9,7 @@ use App\Models\Test;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -49,7 +50,19 @@ class QuestionResource extends Resource
                         RichEditor::make('question_text')
                             ->label('Вопрос')
                             ->columnSpanFull()
+                            ->required(),
+
+                        Select::make('type')
+                            ->label('Тип ответа')
                             ->required()
+                            ->options([
+                                'text' => 'Кнопка',
+                                'select' => 'Выпадающий список',
+                            ]),
+                        
+                        Toggle::make('is_prural')
+                            ->default(false)
+                            ->label('Множественный варианты ответа')
                     ]
                 )
             ]);

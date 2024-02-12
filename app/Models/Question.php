@@ -11,7 +11,9 @@ class Question extends Model
 
     protected $fillable = [
         'test_id',
-        'question_text'
+        'question_text',
+        'type',
+        'is_prural',
     ];
 
     // Вопрос принадлежит к одному тесту

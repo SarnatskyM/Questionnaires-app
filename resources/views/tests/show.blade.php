@@ -1,7 +1,6 @@
 <link href="{{ asset('css/test.css') }}" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-
 <form action="{{ route('test.submit', $test) }}" method="post">
     @csrf
     <div class="container">
@@ -15,14 +14,40 @@
                     <div class="test__question">
                         <p>{!! $question->question_text !!}</p>
                     </div>
-                    @foreach ($question->options as $option)
-                        <div class="test__answer">
-                            <label class="test__label">
-                                <input class="test__input" type="radio" name="answers[{{ $question->id }}]" value="{{ $option->id }}">
-                                <span class="test__text">{!! $option->option_text !!}</span>
-                            </label>
-                        </div>
-                    @endforeach
+
+                    @if ($question->type === 'select')
+                        @if ($question->is_prural)
+                            <select class="test__input" name="answers[{{ $question->id }}][]" multiple>
+                            @else
+                                <select class="test__input" name="answers[{{ $question->id }}]">
+                        @endif
+                        @foreach ($question->options as $option)
+                            <option value="{{ $option->id }}">{{ $option->option_text }}</option>
+                        @endforeach
+                        </select>
+                    @elseif ($question->type === 'text')
+                        @if ($question->is_prural)
+                            <div class="test__answer">
+                                @foreach ($question->options as $option)
+                                    <label class="test__label">
+                                        <input class="test__input" type="checkbox" name="answers[{{ $question->id }}][]"
+                                            value="{{ $option->id }}">
+                                        <span class="test__text">{!! $option->option_text !!}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="test__answer">
+                                @foreach ($question->options as $option)
+                                    <label class="test__label">
+                                        <input class="test__input" type="radio" name="answers[{{ $question->id }}]"
+                                            value="{{ $option->id }}">
+                                        <span class="test__text">{!! $option->option_text !!}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @endif
+                    @endif
                 </div>
             @endforeach
         </div>

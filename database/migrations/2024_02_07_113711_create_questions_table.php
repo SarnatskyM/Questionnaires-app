@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('test_id')->constrained()->onDelete('cascade');
             $table->text('question_text');
+            $table->string('type')->default('radio');
+            $table->boolean('is_prural')->default(0);
             $table->timestamps();
         });
     }

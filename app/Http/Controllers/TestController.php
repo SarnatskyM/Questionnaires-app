@@ -17,7 +17,7 @@ class TestController extends Controller
     public function show($slug)
     {
         $test = Test::where('slug', $slug)->firstOrFail();
-        if($test->is_active == 0){
+        if ($test->is_active == 0) {
             abort(404);
         }
         return view('tests.show', compact('test'));
@@ -25,12 +25,22 @@ class TestController extends Controller
 
     public function submit(Request $request, Test $test)
     {
-        foreach ($request->input('answers') as $question_id => $answer_text) {
-            $answer = new Answer();
-            $answer->test_id = $test->id; 
-            $answer->question_id = $question_id;
-            $answer->option_id = $answer_text;
-            $answer->save();
+        foreach ($request->input('answers') as $question_id => $answer) {
+            if (is_array($answer)) {
+                foreach ($answer as $option_id) {
+                    $answerModel = new Answer();
+                    $answerModel->test_id = $test->id;
+                    $answerModel->question_id = $question_id;
+                    $answerModel->option_id = $option_id;
+                    $answerModel->save();
+                }
+            } else {
+                $answerModel = new Answer();
+                $answerModel->test_id = $test->id;
+                $answerModel->question_id = $question_id;
+                $answerModel->option_id = $answer;
+                $answerModel->save();
+            }
         }
         return redirect('/success');
     }
