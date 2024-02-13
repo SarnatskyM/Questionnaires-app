@@ -12,7 +12,7 @@
             @foreach ($test->questions as $question)
                 <div class="example">
                     <div class="test__question">
-                        <p>{!! $question->question_text !!}</p>
+                        <p class="test_question-text">{!! $question->question_text !!}</p>
                     </div>
 
                     @if ($question->type === 'select')

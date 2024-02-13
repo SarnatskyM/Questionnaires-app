@@ -19,6 +19,10 @@
 	margin-bottom: 20px;
 }
 
+.test_question-text{
+	background-color: #000000;
+}
+
 .test__label{
     display: flex;
     width: 100%;
@@ -119,8 +123,15 @@ display: grid;
 	background: url(/img/checked-radio.svg) 0 0 no-repeat;
 }
 
+select{
+	height: 35px;
+}
+
 .test__input{
 	color: rgb(9, 31, 91);
+	background-color: rgb(244, 248, 254);
+	border-radius: 15px;
+	padding: 0 20px;
 	font-family: Roboto;
 	font-size: 20px;
 	font-weight: 300;
