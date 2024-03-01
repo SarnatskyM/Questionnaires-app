@@ -60,6 +60,7 @@ class QuestionResource extends Resource
                                 ->options([
                                     'text' => 'Кнопка',
                                     'select' => 'Выпадающий список',
+                                    'free_text' => 'Свободный ответ'
                                 ]),
 
                             Toggle::make('is_prural')

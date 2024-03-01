@@ -51,6 +51,12 @@
                                 @endforeach
                             </div>
                         @endif
+                    @elseif ($question->type === 'free_text')
+                        <div class="example">
+                            <div class="test__answer">
+                                <textarea class="test__input-area" @if ($question->is_required === 1) required @endif name="answers[{{ $question->id }}]"></textarea>
+                            </div>
+                        </div>
                     @endif
                 </div>
             @endforeach

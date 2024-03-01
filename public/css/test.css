@@ -139,6 +139,26 @@ select{
 	letter-spacing: 0%;
 }
 
+.test__input-area{
+    width: 100%;
+    color: rgb(9, 31, 91);
+    background-color: rgb(244, 248, 254);
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 23px;
+    letter-spacing: 0%;
+    resize: none;
+    overflow: hidden;
+}
+
+textarea:focus, input:focus
+{
+  outline: none;
+}
+
 .test__label{
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
