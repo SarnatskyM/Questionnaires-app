@@ -9,7 +9,7 @@
             <p class="text-under">{!! $test->description !!}</p>
         </div>
         <div class="test">
-            @foreach ($test->questions as $question)
+            @foreach ($test->questions()->orderBy('sort', 'asc')->get() as $question)
                 <div class="example">
                     <div class="test__question">
                         <p>{!! $question->question_text !!}</p>
@@ -17,9 +17,11 @@
 
                     @if ($question->type === 'select')
                         @if ($question->is_prural)
-                            <select class="test__input" name="answers[{{ $question->id }}][]" multiple>
+                            <select class="test__input" @if ($question->is_required === 1) required @endif
+                                name="answers[{{ $question->id }}][]" multiple>
                             @else
-                                <select class="test__input" name="answers[{{ $question->id }}]">
+                                <select class="test__input" @if ($question->is_required === 1) required @endif
+                                    name="answers[{{ $question->id }}]">
                         @endif
                         @foreach ($question->options as $option)
                             <option value="{{ $option->id }}">{{ $option->option_text }}</option>
@@ -30,7 +32,8 @@
                             <div class="test__answer">
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
-                                        <input class="test__input" type="checkbox" name="answers[{{ $question->id }}][]"
+                                        <input class="test__input" @if ($question->is_required === 1) required @endif
+                                            type="checkbox" name="answers[{{ $question->id }}][]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>
@@ -40,7 +43,8 @@
                             <div class="test__answer">
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
-                                        <input class="test__input" type="radio" name="answers[{{ $question->id }}]"
+                                        <input class="test__input" @if ($question->is_required === 1) required @endif
+                                            type="radio" name="answers[{{ $question->id }}]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>

@@ -14,6 +14,8 @@ class Question extends Model
         'question_text',
         'type',
         'is_prural',
+        'is_required',
+        'sort'
     ];
 
     // Вопрос принадлежит к одному тесту

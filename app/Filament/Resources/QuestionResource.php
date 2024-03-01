@@ -9,6 +9,7 @@ use App\Models\Test;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -39,32 +40,42 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()->schema(
-                    [
-                        Select::make('test_id')
-                            ->options(Test::all()->pluck('title', 'id'))
-                            ->label('Тест')
-                            ->columnSpanFull()
-                            ->required(),
+                Section::make()
+                    ->schema(
+                        [
+                            Select::make('test_id')
+                                ->options(Test::all()->pluck('title', 'id'))
+                                ->label('Тест')
+                                ->columnSpanFull()
+                                ->required(),
 
-                        RichEditor::make('question_text')
-                            ->label('Вопрос')
-                            ->columnSpanFull()
-                            ->required(),
+                            RichEditor::make('question_text')
+                                ->label('Вопрос')
+                                ->columnSpanFull()
+                                ->required(),
 
-                        Select::make('type')
-                            ->label('Тип ответа')
-                            ->required()
-                            ->options([
-                                'text' => 'Кнопка',
-                                'select' => 'Выпадающий список',
-                            ]),
-                        
-                        Toggle::make('is_prural')
-                            ->default(false)
-                            ->label('Множественный варианты ответа')
-                    ]
-                )
+                            Select::make('type')
+                                ->label('Тип ответа')
+                                ->required()
+                                ->options([
+                                    'text' => 'Кнопка',
+                                    'select' => 'Выпадающий список',
+                                ]),
+
+                            Toggle::make('is_prural')
+                                ->default(false)
+                                ->label('Множественный варианты ответа'),
+
+                            Toggle::make('is_required')
+                                ->default(false)
+                                ->label('Обязательный вопрос'),
+
+                            TextInput::make('sort')
+                                ->label('Сортировка')
+                                ->integer()
+                                ->default(0)
+                        ]
+                    )
             ]);
     }
 
