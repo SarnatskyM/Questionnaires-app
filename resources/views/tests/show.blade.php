@@ -17,7 +17,7 @@
 
                     @if ($question->type === 'select')
                         @if ($question->is_prural)
-                            <select class="test__input" @if ($question->is_required === 1) required @endif
+                            <select class="test__input-prural-select" @if ($question->is_required === 1) required @endif
                                 name="answers[{{ $question->id }}][]" multiple>
                             @else
                                 <select class="test__input" @if ($question->is_required === 1) required @endif

@@ -1,14 +1,14 @@
-.container{
+.container {
 	display: grid;
 	justify-content: center;
 }
 
-.title{
+.title {
 	margin: 60px auto 65px auto;
 	text-align: center;
 }
 
-.text-upper{
+.text-upper {
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
 	font-size: 24px;
@@ -19,16 +19,17 @@
 	margin-bottom: 20px;
 }
 
-.test_question-text{
+.test_question-text {
 	background-color: #000000;
 }
 
-.test__label{
-    display: flex;
-    width: 100%;
-    gap: 20px;
+.test__label {
+	display: flex;
+	width: 100%;
+	gap: 20px;
 }
-.text-under{
+
+.text-under {
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
 	font-size: 32px;
@@ -38,7 +39,7 @@
 	text-align: center;
 }
 
-.test{
+.test {
 	display: grid;
 	gap: 20px;
 	border-radius: 15px;
@@ -47,19 +48,19 @@
 	margin-bottom: 73px;
 }
 
-.test::-webkit-scrollbar{
+.test::-webkit-scrollbar {
 	width: 10px;
 	border-radius: 35px;
 	background: rgb(245, 245, 245);
-	
+
 }
 
-.test::-webkit-scrollbar-thumb{
+.test::-webkit-scrollbar-thumb {
 	border-radius: 35px;
 	background: rgb(9, 31, 91);
 }
 
-.example{
+.example {
 	display: grid;
 	gap: 25px;
 	padding: 25px;
@@ -68,7 +69,7 @@
 	border-radius: 15px;
 }
 
-.test__question{
+.test__question {
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
 	font-size: 28px;
@@ -78,7 +79,7 @@
 	text-align: left;
 }
 
-.test__answer{
+.test__answer {
 	display: flex;
 	width: 834px;
 	height: 55px;
@@ -87,18 +88,19 @@
 	padding: 0 20px;
 }
 
-.test__text{
-    display: flex;
-    align-items: center;
+.test__text {
+	display: flex;
+	align-items: center;
 }
 
-.test__answer-radio{
-display: grid;
+.test__answer-radio {
+	display: grid;
 }
 
 .test__answer-radio input[type=radio] {
 	display: none;
 }
+
 .test__answer-radio label {
 	display: inline-block;
 	cursor: pointer;
@@ -106,6 +108,7 @@ display: grid;
 	padding: 5px 0px 0px 30px;
 	user-select: none;
 }
+
 .test__answer-radio label:before {
 	content: "";
 	display: inline-block;
@@ -116,21 +119,21 @@ display: grid;
 	bottom: 1px;
 	background: url(/img/unchecked-radio.svg) 0 0 no-repeat;
 }
- 
-.test__answer-radio input[type=radio]:checked + label:before {
+
+.test__answer-radio input[type=radio]:checked+label:before {
 	background: url(/img/checked-radio.svg) 0 0 no-repeat;
 }
 
-select{
+select {
 	height: 35px;
 }
 
-.test__input{
+.test__input {
 	color: rgb(9, 31, 91);
 	background-color: rgb(244, 248, 254);
 	border-radius: 15px;
 	padding: 0 20px;
-    padding-top: 7px;
+	padding-top: 7px;
 	font-family: Roboto;
 	font-size: 20px;
 	font-weight: 300;
@@ -138,27 +141,41 @@ select{
 	letter-spacing: 0%;
 }
 
-.test__input-area{
-    width: 100%;
-    color: rgb(9, 31, 91);
-    background-color: rgb(244, 248, 254);
-    border-radius: 15px;
-    padding: 10px 20px;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 23px;
-    letter-spacing: 0%;
-    resize: none;
-    overflow: hidden;
+.test__input-prural-select {
+	color: rgb(9, 31, 91);
+	background-color: rgb(244, 248, 254);
+	border-radius: 15px;
+	padding: 0 20px;
+	padding-top: 7px;
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 23px;
+	letter-spacing: 0%;
+	height: 120px;
 }
 
-textarea:focus, input:focus
-{
-  outline: none;
+.test__input-area {
+	width: 100%;
+	color: rgb(9, 31, 91);
+	background-color: rgb(244, 248, 254);
+	border-radius: 15px;
+	padding: 10px 20px;
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 23px;
+	letter-spacing: 0%;
+	resize: none;
+	overflow: hidden;
 }
 
-.test__label{
+textarea:focus,
+input:focus {
+	outline: none;
+}
+
+.test__label {
 	color: rgb(9, 31, 91);
 	font-family: Roboto;
 	font-size: 20px;
@@ -168,7 +185,7 @@ textarea:focus, input:focus
 	text-align: left;
 }
 
-.btn{
+.btn {
 	margin: 0 auto 60px auto;
 	width: 319px;
 	height: 78px;
