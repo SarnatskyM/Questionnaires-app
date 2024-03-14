@@ -18,10 +18,10 @@
                     @if ($question->type === 'select')
                         @if ($question->is_prural)
                             <select class="test__input-prural-select" @if ($question->is_required === 1) required @endif
-                                name="answers[{{ $question->id }}][]" multiple>
+                                name="answers[{{ $question->id }}][{{ $question->id }}]" multiple>
                             @else
                                 <select class="test__input" @if ($question->is_required === 1) required @endif
-                                    name="answers[{{ $question->id }}]">
+                                    name="answers[{{ $question->id }}][{{ $question->id }}]">
                         @endif
                         @foreach ($question->options as $option)
                             <option value="{{ $option->id }}">{{ $option->option_text }}</option>
@@ -33,7 +33,7 @@
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
                                         <input class="test__input" @if ($question->is_required === 1) required @endif
-                                            type="checkbox" name="answers[{{ $question->id }}][]"
+                                            type="checkbox" name="answers[{{ $question->id }}][{{ $question->id }}]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>
@@ -44,7 +44,7 @@
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
                                         <input class="test__input" @if ($question->is_required === 1) required @endif
-                                            type="radio" name="answers[{{ $question->id }}]"
+                                            type="radio" name="answers[{{ $question->id }}][{{ $question->id }}]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>
@@ -54,7 +54,7 @@
                     @elseif ($question->type === 'free_text')
                         <div class="example">
                             <div class="test__answer">
-                                <textarea class="test__input-area" @if ($question->is_required === 1) required @endif name="answers[{{ $question->id }}]"></textarea>
+                                <textarea class="test__input-area" @if ($question->is_required === 1) required @endif name="answers[{{ $question->id }}][{{ $question->id }}]"></textarea>
                             </div>
                         </div>
                     @endif
