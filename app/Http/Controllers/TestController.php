@@ -26,38 +26,29 @@ class TestController extends Controller
 
     public function submit(Request $request, Test $test)
     {
-        dd($request->input('answers'));
         foreach ($request->input('answers') as $question_id => $answer) {
             if (is_array($answer)) {
                 foreach ($answer as $option_id) {
                     $answerModel = new Answer();
                     $answerModel->test_id = $test->id;
                     $answerModel->question_id = $question_id;
-                    // if (!is_numeric($option_id)) {
-
-                    //     $id = Option::updateOrCreate([
-                    //         'question_id' => $answerModel->question_id,
-                    //         'option_text' => $option_id
-                    //     ]);
-                    //     $answerModel->option_id = $id->id;
-                    // } else {
-                    $answerModel->option_id = $option_id;
-                    // }
+                    if (ctype_digit($option_id)) {
+                        $answerModel->option_id = $option_id;
+                    } else {
+                        $answerModel->free_answer = $option_id;
+                    }
                     $answerModel->save();
                 }
             } else {
                 $answerModel = new Answer();
                 $answerModel->test_id = $test->id;
                 $answerModel->question_id = $question_id;
-                $answerModel->option_id = $answer;
-                // if (!is_numeric($answerModel->option_id)) {
-                //     $id = Option::updateOrCreate([
-                //         'question_id' => $answerModel->question_id,
-                //         'option_text' => $answer
-                //     ]);
-                //     $answerModel->option_id = $id->id;
-                // } else {
-                // }
+                if (ctype_digit($answer)) {
+                    $answerModel->option_id = $answer;
+                } else {
+                    $answerModel->free_answer = $answer;
+                }
+
                 $answerModel->save();
             }
         }

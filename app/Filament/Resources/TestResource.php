@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\IconColumn;
 
 class TestResource extends Resource
 {
@@ -49,6 +50,7 @@ class TestResource extends Resource
 
                         TextInput::make('slug')
                             ->label('Уникальный URL')
+                            ->prefix('https://nosu-blank.ru/test/')
                             ->required()
                             ->columnSpanFull(),
 
@@ -67,8 +69,18 @@ class TestResource extends Resource
             ->columns([
                 TextColumn::make('title')->searchable()->label('Название'),
                 TextColumn::make('description')->html()->wrap()->label('Описание'),
-                TextColumn::make('slug')->searchable()->label('Уникальный URL'),
-                TextColumn::make('is_active')->label('Активировать')
+                TextColumn::make('slug')
+                    ->copyable()
+                    ->copyMessage('URL скопирован')
+                    ->copyMessageDuration(1500)
+                    ->copyableState(fn (string $state): string => "https://nosu-blank.ru/test/{$state}")
+                    ->searchable()
+                    ->prefix('https://nosu-blank.ru/test/')
+                    ->label('Уникальный URL'),
+
+                IconColumn::make('is_active')
+                    ->label('Активирован')
+                    ->boolean(),
             ])
             ->filters([
                 //
