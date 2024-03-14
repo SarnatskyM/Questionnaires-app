@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['test_id', 'question_id', 'option_id'];
+    protected $fillable = ['test_id', 'question_id', 'option_id', 'free_answer'];
 
     // Ответ принадлежит к одному вопросу
     public function question()

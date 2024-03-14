@@ -62,17 +62,21 @@ class QuestionResource extends Resource
                                     'select' => 'Выпадающий список',
                                     'free_text' => 'Свободный ответ'
                                 ]),
+                            Section::make()
+                                ->columns(2)
+                                ->schema([
+                                    Toggle::make('is_prural')
+                                        ->default(false)
+                                        ->label('Множественный варианты ответа'),
 
-                            Toggle::make('is_prural')
-                                ->default(false)
-                                ->label('Множественный варианты ответа'),
+                                    Toggle::make('is_required')
+                                        ->default(false)
+                                        ->label('Обязательный вопрос'),
+                                ]),
 
-                            Toggle::make('is_required')
-                                ->default(false)
-                                ->label('Обязательный вопрос'),
 
                             TextInput::make('sort')
-                                ->label('Сортировка')
+                                ->label('Порядок размещения')
                                 ->integer()
                                 ->default(0)
                         ]
