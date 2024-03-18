@@ -50,9 +50,15 @@ class AnswerResource extends Resource
                     ->label('Название теста'),
                 TextColumn::make('question.question_text')
                     ->html()
+                    ->wrap()
                     ->label('Вопрос'),
                 TextColumn::make('option.option_text')
-                    ->label('Ответ')
+                    ->wrap()
+                    ->label('Ответ'),
+                TextColumn::make('created_at')
+                    ->label('Время ответа')
+                    ->dateTime()
+
             ])
             ->filters([
                 //
@@ -73,9 +79,7 @@ class AnswerResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            
-        ];
+        return [];
     }
 
     public static function getWidgets(): array
