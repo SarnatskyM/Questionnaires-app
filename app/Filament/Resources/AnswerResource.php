@@ -44,7 +44,7 @@ class AnswerResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
+        return $table->reorderable('created_at', 'asc')
             ->columns([
                 TextColumn::make('test.title')
                     ->label('Название теста'),
