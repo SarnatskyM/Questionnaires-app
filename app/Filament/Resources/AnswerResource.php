@@ -5,12 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AnswerResource\Pages;
 use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
 use App\Models\Answer;
+use Filament\Actions\ExportAction;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -67,10 +69,10 @@ class AnswerResource extends Resource
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                ExportBulkAction::make()->exports([
-                    ExcelExport::make()
-                        ->askForFilename()
-                ]),
+                // ExportBulkAction::make()->exports([
+                //     ExcelExport::make()
+                //         ->askForFilename()
+                // ]),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),

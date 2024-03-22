@@ -11,6 +11,7 @@ class Question extends Model
 
     protected $fillable = [
         'test_id',
+        'question_id',
         'question_text',
         'type',
         'is_prural',

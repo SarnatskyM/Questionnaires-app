@@ -49,6 +49,9 @@ class QuestionResource extends Resource
                                 ->columnSpanFull()
                                 ->required(),
 
+                            TextInput::make('question_id')
+                                ->label('Псевдоайди'),
+
                             RichEditor::make('question_text')
                                 ->label('Вопрос')
                                 ->columnSpanFull()

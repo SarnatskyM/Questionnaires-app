@@ -17,11 +17,11 @@
 
                     @if ($question->type === 'select')
                         @if ($question->is_prural)
-                            <select id="{{ $question->question_text }}" class="test__input-prural-select"
+                            <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input-prural-select"
                                 @if ($question->is_required === 1) required @endif
                                 name="answers[{{ $question->id }}][{{ $question->id }}]" multiple>
                             @else
-                                <select id="{{ $question->question_text }}" class="test__input"
+                                <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input"
                                     @if ($question->is_required === 1) required @endif
                                     name="answers[{{ $question->id }}][{{ $question->id }}]">
                         @endif
@@ -1973,10 +1973,10 @@
 
     }
 
-    const facultySelect = document.getElementById("<p>Факультет</p>");
-    const departmentSelect = document.getElementById("<p>Направление</p>");
-    const courseSelect = document.getElementById("<p>Курс</p>");
-    const teacherSelect = document.getElementById("<p>Преподаватель</p>");
+    const facultySelect = document.getElementById("Факультет");
+    const departmentSelect = document.getElementById("Направление");
+    const courseSelect = document.getElementById("Курс");
+    const teacherSelect = document.getElementById("Преподаватель");
 
     facultySelect.addEventListener("change", function() {
         const selectedFacultyOption = facultySelect.options[facultySelect.selectedIndex];
