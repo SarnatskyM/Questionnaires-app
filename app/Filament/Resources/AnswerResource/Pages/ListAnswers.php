@@ -4,14 +4,13 @@ namespace App\Filament\Resources\AnswerResource\Pages;
 
 use App\Filament\Resources\AnswerResource;
 use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
-use App\Imports\MyClientImport;
 use App\Models\Test;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Components\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ListAnswers extends ListRecords
 {
@@ -20,8 +19,19 @@ class ListAnswers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-       
-           
+            ExportAction::make()
+                ->exports([
+                    ExcelExport::make()
+                        ->fromTable()
+                        ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
+                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                        ->withColumns([
+                            Column::make('test.title'),
+                            Column::make('question.question_text'),
+                            Column::make('option.option_text'),
+                            Column::make('created_at'),
+                        ])
+                ]),
         ];
     }
 
