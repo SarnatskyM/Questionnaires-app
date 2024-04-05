@@ -24,12 +24,12 @@ class ListAnswers extends ListRecords
                     ExcelExport::make()
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLS)
                         ->withColumns([
-                            Column::make('test.title'),
-                            Column::make('question.question_text'),
-                            Column::make('option.option_text'),
-                            Column::make('created_at'),
+                            Column::make('test.title')->heading('Тест'),
+                            Column::make('question.question_text')->heading('Вопрос'),
+                            Column::make('option.option_text')->heading('Ответ'),
+                            Column::make('created_at')->heading('Время ответа'),
                         ])
                 ]),
         ];
