@@ -19,7 +19,7 @@
                         @if ($question->is_prural)
                             <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input-prural-select"
                                 @if ($question->is_required === 1) required @endif
-                                name="answers[{{ $question->id }}][{{ $question->id }}]" multiple>
+                                name="answers[{{$question->id}}][]" multiple>
                             @else
                                 <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input"
                                     @if ($question->is_required === 1) required @endif
@@ -36,7 +36,7 @@
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
                                         <input class="test__input" @if ($question->is_required === 1) required @endif
-                                            type="checkbox" name="answers[{{ $question->id }}][{{ $question->id }}]"
+                                            type="checkbox" name="answers[{{ $question->id }}][]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>
@@ -47,7 +47,7 @@
                                 @foreach ($question->options as $option)
                                     <label class="test__label">
                                         <input class="test__input" @if ($question->is_required === 1) required @endif
-                                            type="radio" name="answers[{{ $question->id }}][{{ $question->id }}]"
+                                            type="radio" name="answers[{{ $question->id }}][]"
                                             value="{{ $option->id }}">
                                         <span class="test__text">{!! $option->option_text !!}</span>
                                     </label>
