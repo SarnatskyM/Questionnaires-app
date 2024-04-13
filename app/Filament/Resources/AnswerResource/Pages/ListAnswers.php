@@ -24,7 +24,7 @@ class ListAnswers extends ListRecords
                     ExcelExport::make()
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::XLS)
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('test.title')->heading('Тест'),
                             Column::make('question.question_text')->heading('Вопрос'),
