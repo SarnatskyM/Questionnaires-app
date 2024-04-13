@@ -27,10 +27,12 @@ class AnswerExport implements FromCollection
      */
     public function collection()
     {
-        return Answer::chunk($this->chunkSize, function ($answers) {
-            foreach ($answers as $answer) {
-                yield $answer;
-            }
-        });
+        return Answer::with('question', 'test', 'option')
+            ->get();
+    }
+
+    public function chunkSize(): int
+    {
+        return $this->chunkSize;
     }
 }
