@@ -40,7 +40,7 @@ class RespondentController extends Controller
         ob_start();
 
         // Отправляем данные в буфер вывода построчно
-        $chunkSize = 1000; // Размер чанка
+        $chunkSize = 200; // Размер чанка
         $offset = 0;
         do {
             // Читаем данные из базы по чанкам
