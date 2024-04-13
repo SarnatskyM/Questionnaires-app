@@ -18,7 +18,8 @@ class RespondentController extends Controller
 
     public function export()
     {
-        return Excel::download(new AnswerExport, 'answer.xlsx');
+        $export = new AnswerExport(500);
+        return Excel::download($export, 'answer.xlsx');
     }
 
     // Метод для обработки данных регистрации
