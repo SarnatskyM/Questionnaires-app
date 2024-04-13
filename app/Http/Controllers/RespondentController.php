@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnswerExport;
 use Illuminate\Http\Request;
 use App\Models\Respondent;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class RespondentController extends Controller
 {
@@ -11,6 +14,11 @@ class RespondentController extends Controller
     public function showRegistrationForm()
     {
         return view('registration.form');
+    }
+
+    public function export()
+    {
+        return Excel::download(new AnswerExport, 'answer.xlsx');
     }
 
     // Метод для обработки данных регистрации
