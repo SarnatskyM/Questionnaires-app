@@ -26,7 +26,7 @@ class ListAnswers extends ListRecords
                         ->withChunkSize(100)
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
                         ->withColumns([
                             Column::make('test.title')->heading('Тест'),
                             Column::make('question.question_text')->heading('Вопрос'),
