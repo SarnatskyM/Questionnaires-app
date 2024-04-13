@@ -23,8 +23,6 @@ class ListAnswers extends ListRecords
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->queue()
-                        ->withChunkSize(100)
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLS)
                         ->withColumns([
