@@ -24,6 +24,7 @@ class ListAnswers extends ListRecords
                     ExcelExport::make()
                         ->fromTable()
                         ->queue()
+                        ->withChunkSize(1000)
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLS)
                         ->withColumns([
