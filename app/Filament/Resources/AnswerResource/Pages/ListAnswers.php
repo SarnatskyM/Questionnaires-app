@@ -22,6 +22,8 @@ class ListAnswers extends ListRecords
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
+                        ->queue()
+                        ->withChunkSize(100)
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
