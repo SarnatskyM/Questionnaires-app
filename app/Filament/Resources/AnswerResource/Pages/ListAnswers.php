@@ -22,9 +22,11 @@ class ListAnswers extends ListRecords
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
+                        ->queue()
+                        ->withChunkSize(100)
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('test.title')->heading('Тест'),
                             Column::make('question.question_text')->heading('Вопрос'),
