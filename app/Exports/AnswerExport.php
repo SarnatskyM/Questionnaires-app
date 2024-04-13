@@ -12,6 +12,6 @@ class AnswerExport implements FromCollection
     */
     public function collection()
     {
-        return Answer::with('question', 'test', 'option')->get();
+        return Answer::all();
     }
 }
