@@ -22,32 +22,28 @@ class RespondentController extends Controller
 
     public function export()
     {
-        // Создаем новый объект класса Xlsx Writer
+
         $spreadsheet = new Spreadsheet();
 
-        // Отправляем данные в потоковый вывод построчно
-        $filename = 'answers.xlsx'; // Имя файла
+ 
+        $filename = 'answers.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
 
-        // Получаем активный лист
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Устанавливаем заголовки столбцов
         $sheet->setCellValue('A1', 'Тест');
         $sheet->setCellValue('B1', 'Вопрос');
         $sheet->setCellValue('C1', 'Ответ');
         $sheet->setCellValue('D1', 'Свободный ответ');
         $sheet->setCellValue('E1', 'Время ответа');
 
-        $chunkSize = 50; // Размер чанка
+        $chunkSize = 50;
         $offset = 0;
         do {
-            // Читаем данные из базы по чанкам
             $data = Answer::with('test', 'question', 'option')->skip($offset)->take($chunkSize)->get();
 
-            // Если данные не пусты
             if (!$data->isEmpty()) {
                 foreach ($data as $index => $row) {
                     $sheet->setCellValue('A' . ($index + $offset + 2), $row->test->title);
@@ -62,10 +58,8 @@ class RespondentController extends Controller
         } while (!$data->isEmpty());
 
         $writer = new Xlsx($spreadsheet);
-        // Сохраняем файл
         $writer->save('php://output');
 
-        // Завершаем выполнение скрипта
         exit;
     }
 
