@@ -77,9 +77,6 @@ class RespondentController extends Controller
             flush();
         } while (!$data->isEmpty());
 
-        // Закрываем файл после завершения цикла
-        $writer->close();
-
         // Завершаем выполнение скрипта
         exit;
     }
