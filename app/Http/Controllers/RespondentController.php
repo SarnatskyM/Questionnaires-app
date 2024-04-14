@@ -44,7 +44,7 @@ class RespondentController extends Controller
         header('Cache-Control: max-age=0');
         $writer->setUseDiskCaching(true);
 
-        $chunkSize = 50; // Размер чанка
+        $chunkSize = 100; // Размер чанка
         $offset = 0;
         do {
             // Отключаем буфер вывода, чтобы данные не копились в памяти
