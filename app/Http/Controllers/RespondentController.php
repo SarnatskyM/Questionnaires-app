@@ -6,6 +6,7 @@ use App\Exports\AnswerExport;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Respondent;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -23,33 +24,25 @@ class RespondentController extends Controller
     public function export()
     {
 
-        // Создаем новый объект класса Spreadsheet
-        $spreadsheet = new Spreadsheet();
+        // Создаем объект для записи Excel
+        $writer = WriterEntityFactory::createXLSXWriter();
 
-        // Получаем активный лист
-        $sheet = $spreadsheet->getActiveSheet();
+        // Открываем поток для записи данных
+        $writer->openToBrowser('answers.xlsx');
 
-        // Устанавливаем заголовки столбцов
-        $sheet->setCellValue('A1', 'Тест');
-        $sheet->setCellValue('B1', 'Вопрос');
-        $sheet->setCellValue('C1', 'Ответ');
-        $sheet->setCellValue('D1', 'Свободный ответ');
-        $sheet->setCellValue('E1', 'Время ответа');
-
-        // Устанавливаем частичную потоковую запись в файл
-        $writer = new Xlsx($spreadsheet);
-        // $writer->setShouldCreateNewSheets(true);
-        $filename = 'answers.xlsx'; // Имя файла
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $writer->setUseDiskCaching(true);
+        // Записываем заголовки столбцов
+        $writer->addRow(
+            WriterEntityFactory::createRow([
+                WriterEntityFactory::createCell('Тест'),
+                WriterEntityFactory::createCell('Вопрос'),
+                WriterEntityFactory::createCell('Ответ'),
+                WriterEntityFactory::createCell('Свободный ответ'),
+                WriterEntityFactory::createCell('Время ответа'),
+            ])
+        );
 
         $chunkSize = 50; // Размер чанка
         $offset = 0;
-
-        // Открываем файл для записи
-        $writer->save('php://output');
 
         do {
             // Читаем данные из базы по чанкам
@@ -57,25 +50,40 @@ class RespondentController extends Controller
 
             // Если данные не пусты
             if (!$data->isEmpty()) {
-                foreach ($data as $index => $row) {
-                    $sheet->setCellValue('A' . ($index + $offset + 2), $row->test->title);
-                    $sheet->setCellValue('B' . ($index + $offset + 2), $row->question->question_text ?? "");
-                    $sheet->setCellValue('C' . ($index + $offset + 2), $row->option->option_text ?? "");
-                    $sheet->setCellValue('D' . ($index + $offset + 2), $row->free_answer);
-                    $sheet->setCellValue('E' . ($index + $offset + 2), $row->created_at);
+                foreach ($data as $row) {
+                    // Добавляем строку в файл Excel
+                    $testTitle = $row->test->title;
+                    $questionText = $row->question->question_text ?? "";
+                    $optionText = $row->option->option_text ?? "";
+                    $freeAnswer = $row->free_answer;
+                    $createdAt = $row->created_at;
+
+                    // Преобразуем дату в строку в формате "год-месяц-день час:минута:секунда"
+                    $formattedDate = $createdAt->format('Y-m-d H:i:s');
+
+                    // Добавляем значения в файл Excel
+                    $writer->addRow(
+                        WriterEntityFactory::createRow([
+                            WriterEntityFactory::createCell($testTitle),
+                            WriterEntityFactory::createCell($questionText),
+                            WriterEntityFactory::createCell($optionText),
+                            WriterEntityFactory::createCell($freeAnswer),
+                            WriterEntityFactory::createCell($formattedDate),
+                        ])
+                    );
                 }
 
                 // Увеличиваем смещение
                 $offset += $chunkSize;
-
-                // Сохраняем чанк данных в файл
-                $writer->save('php://output');
             }
 
             // Очищаем буфер вывода перед следующим чанком
             ob_flush();
             flush();
         } while (!$data->isEmpty());
+
+        // Закрываем поток
+        $writer->close();
 
         // Завершаем выполнение скрипта
         exit;
