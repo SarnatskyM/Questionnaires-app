@@ -38,19 +38,20 @@ class RespondentController extends Controller
 
         // Устанавливаем частичную потоковую запись в файл
         $writer = new Xlsx($spreadsheet);
+        // $writer->setShouldCreateNewSheets(true);
         $filename = 'answers.xlsx'; // Имя файла
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
         $writer->setUseDiskCaching(true);
 
-        $chunkSize = 100; // Размер чанка
+        $chunkSize = 50; // Размер чанка
         $offset = 0;
-        do {
-            // Отключаем буфер вывода, чтобы данные не копились в памяти
-            ob_end_clean();
-            ob_start();
 
+        // Открываем файл для записи
+        $writer->save('php://output');
+
+        do {
             // Читаем данные из базы по чанкам
             $data = Answer::with('test', 'question', 'option')->skip($offset)->take($chunkSize)->get();
 
@@ -66,17 +67,20 @@ class RespondentController extends Controller
 
                 // Увеличиваем смещение
                 $offset += $chunkSize;
+
+                // Сохраняем чанк данных в файл
+                $writer->save('php://output');
             }
 
-            // Сохраняем чанк данных в файл
-            $writer->save('php://output');
-
             // Очищаем буфер вывода перед следующим чанком
-            ob_end_flush();
+            ob_flush();
             flush();
         } while (!$data->isEmpty());
 
+        // Закрываем файл после завершения цикла
+        $writer->close();
 
+        // Завершаем выполнение скрипта
         exit;
     }
 
