@@ -23,27 +23,38 @@ class RespondentController extends Controller
     public function export()
     {
 
+        // Создаем новый объект класса Spreadsheet
         $spreadsheet = new Spreadsheet();
 
- 
-        $filename = 'answers.xlsx';
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
+        // Получаем активный лист
         $sheet = $spreadsheet->getActiveSheet();
 
+        // Устанавливаем заголовки столбцов
         $sheet->setCellValue('A1', 'Тест');
         $sheet->setCellValue('B1', 'Вопрос');
         $sheet->setCellValue('C1', 'Ответ');
         $sheet->setCellValue('D1', 'Свободный ответ');
         $sheet->setCellValue('E1', 'Время ответа');
 
-        $chunkSize = 50;
+        // Устанавливаем частичную потоковую запись в файл
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'answers.xlsx'; // Имя файла
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $writer->setUseDiskCaching(true);
+
+        $chunkSize = 50; // Размер чанка
         $offset = 0;
         do {
+            // Отключаем буфер вывода, чтобы данные не копились в памяти
+            ob_end_clean();
+            ob_start();
+
+            // Читаем данные из базы по чанкам
             $data = Answer::with('test', 'question', 'option')->skip($offset)->take($chunkSize)->get();
 
+            // Если данные не пусты
             if (!$data->isEmpty()) {
                 foreach ($data as $index => $row) {
                     $sheet->setCellValue('A' . ($index + $offset + 2), $row->test->title);
@@ -52,9 +63,17 @@ class RespondentController extends Controller
                     $sheet->setCellValue('D' . ($index + $offset + 2), $row->free_answer);
                     $sheet->setCellValue('E' . ($index + $offset + 2), $row->created_at);
                 }
+
                 // Увеличиваем смещение
                 $offset += $chunkSize;
             }
+
+            // Сохраняем чанк данных в файл
+            $writer->save('php://output');
+
+            // Очищаем буфер вывода перед следующим чанком
+            ob_end_flush();
+            flush();
         } while (!$data->isEmpty());
 
         $writer = new Xlsx($spreadsheet);
