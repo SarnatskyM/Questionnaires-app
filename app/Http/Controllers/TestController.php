@@ -27,7 +27,6 @@ class TestController extends Controller
     public function submit(Request $request, Test $test)
     {
         foreach ($request->input('answers') as $question_id => $answer) {
-            dd($request->input('answers'));
             if (is_array($answer)) {
                 foreach ($answer as $option_id) {
                     $answerModel = new Answer();
