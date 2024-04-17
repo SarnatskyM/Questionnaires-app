@@ -87,6 +87,7 @@ class RespondentController extends Controller
 
         // Завершаем выполнение скрипта
         exit;
+        return view('tests.export');
     }
 
     // Метод для обработки данных регистрации
