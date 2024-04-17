@@ -41,7 +41,7 @@ class RespondentController extends Controller
             ])
         );
 
-        $chunkSize = 50; // Размер чанка
+        $chunkSize = 300; // Размер чанка
         $offset = 0;
 
         do {
