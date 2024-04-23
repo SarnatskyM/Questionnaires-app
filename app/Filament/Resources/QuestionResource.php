@@ -63,7 +63,8 @@ class QuestionResource extends Resource
                                 ->options([
                                     'text' => 'Кнопка',
                                     'select' => 'Выпадающий список',
-                                    'free_text' => 'Свободный ответ'
+                                    'free_text' => 'Свободный ответ',
+                                    'strange_check' => 'Оценка'
                                 ]),
                             Section::make()
                                 ->columns(2)

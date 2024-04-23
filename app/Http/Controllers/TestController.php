@@ -28,12 +28,18 @@ class TestController extends Controller
     {
         foreach ($request->input('answers') as $question_id => $answer) {
             if (is_array($answer)) {
-                foreach ($answer as $option_id) {
+                foreach ($answer as $key => $option_id) {
                     $answerModel = new Answer();
                     $answerModel->test_id = $test->id;
                     $answerModel->question_id = $question_id;
                     if (ctype_digit($option_id)) {
-                        $answerModel->option_id = $option_id;
+                        if (str_contains($key, "!")) {
+                            $key = str_replace("!", "", $key);
+                            $answerModel->option_id = $key;
+                            $answerModel->free_answer = $option_id;
+                        } else {
+                            $answerModel->option_id = $option_id;
+                        }
                     } else {
                         $answerModel->free_answer = $option_id;
                     }

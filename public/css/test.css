@@ -82,10 +82,14 @@
 .test__answer {
 	display: flex;
 	width: 834px;
-	height: 55px;
+	min-height: 55px;
 	border-radius: 15px;
 	background: rgb(244, 248, 254);
 	padding: 0 20px;
+}
+
+.text-mark{
+	margin: 20px 20px 20px 0;;
 }
 
 .test__text {
@@ -126,6 +130,15 @@
 
 select {
 	height: 35px;
+}
+
+.flex{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex_unrow{
+	display: flex;;
 }
 
 .test__input {
