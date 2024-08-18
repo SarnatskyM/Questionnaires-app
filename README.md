@@ -1,5 +1,3 @@
----
-
 # Laravel Project with Filament Admin Panel
 
 ## Overview
