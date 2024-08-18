@@ -8,6 +8,10 @@ This project is a Laravel application featuring an admin panel built with Filame
 - **Questions**: Add questions and answer options linked to tests.
 - **Results**: View and export test results for further analysis.
 
+### Unique Test URLs
+
+When creating a test, a unique URL is generated for each test. This URL can be shared with participants, allowing them to take the test. The results of each submission are tracked and can be viewed in the **Results** section of the admin panel.
+
 ## Requirements
 
 - PHP >= 8.0
@@ -87,7 +91,7 @@ http://localhost:8000/admin
 
 Log in using the credentials you set up earlier. After logging in, you will see the following sections in the admin panel:
 
-- **Tests**: Create and manage tests.
+- **Tests**: Create and manage tests. Each test generates a unique URL that can be shared with participants. You can monitor and analyze the results of these tests in the **Results** section.
 - **Questions**: Manage questions and associate them with tests. You can also define possible answers for each question.
 - **Results**: View test results, with the option to export data for analysis.
 
@@ -101,4 +105,4 @@ This project is open-sourced software licensed under the [MIT license](LICENSE).
 
 ---
 
-This README should help users understand how to set up and use your Laravel project, as well as navigate the admin panel.
+This updated README now includes the information about the unique URLs generated for tests, which can be shared with participants.
