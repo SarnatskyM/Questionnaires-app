@@ -1,5 +1,3 @@
-Here's a README template for your Laravel project:
-
 ---
 
 # Laravel Project with Filament Admin Panel
