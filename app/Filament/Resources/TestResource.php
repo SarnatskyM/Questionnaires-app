@@ -21,15 +21,15 @@ class TestResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
 
-    protected static ?string $label = "Тест";
+    protected static ?string $label = "Test";
 
-    protected static ?string $modelLabel = "Тест";
+    protected static ?string $modelLabel = "Tests";
 
-    protected static ?string $pluralLabel = "Тесты";
+    protected static ?string $pluralLabel = "Tests";
 
-    protected static ?string $pluralModelLabel = "Тесты";
+    protected static ?string $pluralModelLabel = "Tests";
 
-    protected static ?string $navigationGroup = 'Общее';
+    protected static ?string $navigationGroup = 'General';
 
     protected static ?int $navigationSort = 1;
 
@@ -40,22 +40,22 @@ class TestResource extends Resource
                 Section::make()->schema(
                     [
                         TextInput::make('title')
-                            ->label('Название')
+                            ->label('Title')
                             ->columnSpanFull()
                             ->required(),
 
                         RichEditor::make('description')
-                            ->label('Описание')
+                            ->label('Description')
                             ->columnSpanFull(),
 
                         TextInput::make('slug')
-                            ->label('Уникальный URL')
-                            ->prefix('https://nosu-blank.ru/test/')
+                            ->label('unique URL')
+                            ->prefix('http://{your-domain}/test/')
                             ->required()
                             ->columnSpanFull(),
 
                         Toggle::make('is_active')
-                            ->label('Активировать')
+                            ->label('Activate')
                             ->default(false)
                             ->columnSpanFull()
                     ]
@@ -67,19 +67,19 @@ class TestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable()->label('Название'),
-                TextColumn::make('description')->html()->wrap()->label('Описание'),
+                TextColumn::make('title')->searchable()->label('Title'),
+                TextColumn::make('description')->html()->wrap()->label('Description'),
                 TextColumn::make('slug')
                     ->copyable()
-                    ->copyMessage('URL скопирован')
+                    ->copyMessage('URL copy')
                     ->copyMessageDuration(1500)
-                    ->copyableState(fn (string $state): string => "https://nosu-blank.ru/test/{$state}")
+                    ->copyableState(fn (string $state): string => "http://{your-domain}/test/{$state}")
                     ->searchable()
-                    ->prefix('https://nosu-blank.ru/test/')
-                    ->label('Уникальный URL'),
+                    ->prefix('http://{your-domain}/test/')
+                    ->label('unique URL'),
 
                 IconColumn::make('is_active')
-                    ->label('Активирован')
+                    ->label('Activate')
                     ->boolean(),
             ])
             ->filters([
@@ -87,6 +87,7 @@ class TestResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

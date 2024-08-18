@@ -2,19 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\ProductExporter;
 use App\Filament\Resources\AnswerResource\Pages;
 use App\Filament\Resources\AnswerResource\Widgets\StatsOverview;
 use App\Models\Answer;
-use Filament\Actions\ExportAction;
-use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
-
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -24,15 +18,15 @@ class AnswerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $label = "Результат";
+    protected static ?string $label = "Result";
 
-    protected static ?string $modelLabel = "Результат";
+    protected static ?string $modelLabel = "Result";
 
-    protected static ?string $pluralLabel = "Результаты";
+    protected static ?string $pluralLabel = "Results";
 
-    protected static ?string $pluralModelLabel = "Результаты";
+    protected static ?string $pluralModelLabel = "Results";
 
-    protected static ?string $navigationGroup = 'Вывод';
+    protected static ?string $navigationGroup = 'Settings';
 
     protected static ?int $navigationSort = 4;
 
@@ -51,16 +45,16 @@ class AnswerResource extends Resource
         return $table->reorderable('id', 'desc')
             ->columns([
                 TextColumn::make('test.title')
-                    ->label('Название теста'),
+                    ->label('Title test'),
                 TextColumn::make('question.question_text')
                     ->html()
                     ->wrap()
-                    ->label('Вопрос'),
+                    ->label('Question'),
                 TextColumn::make('option.option_text')
                     ->wrap()
-                    ->label('Ответ'),
+                    ->label('Answer'),
                 TextColumn::make('created_at')
-                    ->label('Время ответа')
+                    ->label('Date')
                     ->dateTime()
 
             ])
@@ -68,13 +62,9 @@ class AnswerResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                // ExportBulkAction::make()->exports([
-                //     ExcelExport::make()
-                //         ->askForFilename()
-                // ]),
+
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),

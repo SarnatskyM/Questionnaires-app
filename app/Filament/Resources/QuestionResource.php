@@ -24,15 +24,15 @@ class QuestionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
-    protected static ?string $label = "Вопрос";
+    protected static ?string $label = "Question";
 
-    protected static ?string $modelLabel = "Вопрос";
+    protected static ?string $modelLabel = "Question";
 
-    protected static ?string $pluralLabel = "Вопросы";
+    protected static ?string $pluralLabel = "Questions";
 
-    protected static ?string $pluralModelLabel = "Вопросы";
+    protected static ?string $pluralModelLabel = "Questions";
 
-    protected static ?string $navigationGroup = 'Общее';
+    protected static ?string $navigationGroup = 'General';
 
     protected static ?int $navigationSort = 3;
 
@@ -45,42 +45,39 @@ class QuestionResource extends Resource
                         [
                             Select::make('test_id')
                                 ->options(Test::all()->pluck('title', 'id'))
-                                ->label('Тест')
+                                ->label('Test')
                                 ->columnSpanFull()
                                 ->required(),
 
-                            TextInput::make('question_id')
-                                ->label('Псевдоайди'),
-
                             RichEditor::make('question_text')
-                                ->label('Вопрос')
+                                ->label('Question text')
                                 ->columnSpanFull()
                                 ->required(),
 
                             Select::make('type')
-                                ->label('Тип ответа')
+                                ->label('Type answer')
                                 ->required()
                                 ->options([
-                                    'text' => 'Кнопка',
-                                    'select' => 'Выпадающий список',
-                                    'free_text' => 'Свободный ответ',
-                                    'strange_check' => 'Оценка'
+                                    'text' => 'Button',
+                                    'select' => 'Dropdown list',
+                                    'free_text' => 'Free answer',
+                                    'strange_check' => 'Marking'
                                 ]),
                             Section::make()
                                 ->columns(2)
                                 ->schema([
                                     Toggle::make('is_prural')
                                         ->default(false)
-                                        ->label('Множественный варианты ответа'),
+                                        ->label('Multiple answer options'),
 
                                     Toggle::make('is_required')
                                         ->default(false)
-                                        ->label('Обязательный вопрос'),
+                                        ->label('Required'),
                                 ]),
 
 
                             TextInput::make('sort')
-                                ->label('Порядок размещения')
+                                ->label('Sort')
                                 ->integer()
                                 ->default(0)
                         ]
@@ -92,17 +89,18 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('test.title')->label('Тест'),
-                TextColumn::make('question_text')->wrap()->html()->label('Вопрос')
+                TextColumn::make('test.title')->label('Test'),
+                TextColumn::make('question_text')->wrap()->html()->label('Question'),
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->label('Анкета')
+                    ->label('Test')
                     ->options(Test::all()->pluck('title', 'id'))
                     ->attribute('test_id')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -7,11 +7,11 @@
     @csrf
     <div class="container">
         <div class="title">
-            <p>Заполнить анкету</p>
+            <p>Fill out the form</p>
         </div>
         <div class="user-name">
             <div class="user-name__text">
-                <p>Введите ФИО:</p>
+                <p>FIO:</p>
             </div>
             <div class="user-name__main">
                 <img class="user-name__img" src="{{ asset('img/Profile.svg') }}" alt="profile">
@@ -20,7 +20,7 @@
         </div>
         <div class="user-mail">
             <div class="user-mail__text">
-                <p>Введите почту:</p>
+                <p>Email:</p>
             </div>
             <div class="user-mail__main">
                 <img class="user-mail__img" src="img/Send.svg" alt="send">

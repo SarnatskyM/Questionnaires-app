@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OptionsRelationManager extends RelationManager
 {
@@ -24,7 +22,7 @@ class OptionsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('option_text')
                     ->columnSpanFull()
-                    ->label('Ответ')
+                    ->label('Answer')
                     ->required(),
             ]);
     }
@@ -34,7 +32,7 @@ class OptionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('option_text')
             ->columns([
-                Tables\Columns\TextColumn::make('option_text')->label('Ответ'),
+                Tables\Columns\TextColumn::make('option_text')->label('Answer'),
             ])
             ->filters([
                 //

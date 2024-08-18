@@ -2,5 +2,5 @@
 <link href="{{ asset('css/finish.css') }}" rel="stylesheet">
 
 <div class="container">
-    <p class="finish">Спасибо, что прошли наш тест!</p>
+    <p class="finish">Thank you for taking our test!</p>
 </div>

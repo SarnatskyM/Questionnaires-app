@@ -13,9 +13,9 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Количество ответов', Answer::all()->count()),
-            Stat::make('Количество респондентов', Respondent::all()->count()),
-            Stat::make('Тестов', Test::all()->count()),
+            Stat::make('Number of responses', Answer::all()->count()),
+            Stat::make('Number of respondents', Respondent::all()->count()),
+            Stat::make('Tests', Test::all()->count()),
         ];
     }
 }

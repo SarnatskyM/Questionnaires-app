@@ -6,14 +6,14 @@ use Filament\Widgets\ChartWidget;
 
 class StatsChart extends ChartWidget
 {
-    protected static ?string $heading = 'График 1';
+    protected static ?string $heading = 'Stats';
 
     protected function getData(): array
     {
         return [
             'datasets' => [
                 [
-                    'label' => 'Чето посчитал',
+                    'label' => 'Example dataset',
                     'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 89],
                 ],
             ],

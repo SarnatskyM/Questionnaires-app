@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="title">
-        <p>Выберите тест</p>
+        <p>Select a test</p>
     </div>
     <div class="main">
         <select id="testDropdown" class="dropdown">
@@ -15,7 +15,7 @@
         </select>
     </div>
     <button id="nextButton" class="btn">
-        <p>Далее</p>
+        <p>Next</p>
     </button>
 </div>
 
