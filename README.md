@@ -102,7 +102,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is open-sourced software licensed under the [MIT license](LICENSE).
-
----
-
-This updated README now includes the information about the unique URLs generated for tests, which can be shared with participants.
