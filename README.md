@@ -25,8 +25,8 @@ Follow the steps below to set up the project on your local environment.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/SarnatskyM/Questionnaires-app.git
+cd Questionnaires-app
 ```
 
 ### 2. Install Dependencies
