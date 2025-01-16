@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Answer;
-use App\Models\Option;
 
 class TestController extends Controller
 {
