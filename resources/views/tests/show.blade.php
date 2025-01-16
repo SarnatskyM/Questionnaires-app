@@ -1,92 +1,88 @@
-<link href="{{ asset('css/test.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+@extends('layouts.app')
 
-<form action="{{ route('test.submit', $test) }}" method="post">
-    @csrf
-    <div class="container">
-        <div class="title">
-            <p class="text-upper">{{ $test->title }}</p>
-            <p class="text-under">{!! $test->description !!}</p>
-        </div>
-        <div class="test">
-            @foreach ($test->questions()->orderBy('sort', 'asc')->get() as $question)
-            <div class="example">
-                <div class="test__question">
-                    <p class="test_question-text">{!! $question->question_text !!}</p>
+@section('title', $test->title)
+
+@section('content')
+    <form action="{{ route('test.submit', $test) }}" method="post" class="form">
+        @csrf
+        <div class="section">
+            <div class="main">
+                <div class="container">
+                    <div class="title">
+                        <p class="title__main">{{ $test->title }}</p>
+                        <p class="title__description">{!! $test->description !!}</p>
+                    </div>
+                    <div class="test">
+                        @foreach ($test->questions()->orderBy('sort', 'asc')->get() as $question)
+                            <div class="test__item">
+                                <div class="test__question">
+                                    <p class="test__question-text">{!! $question->question_text !!}</p>
+                                </div>
+
+                                @if ($question->type === 'strange_check')
+                                    <div class="test__answers test__answers--strange-check">
+                                        @foreach ($question->options as $option)
+                                            <div class="test__answer-group">
+                                                <div class="test__answer-text">{!! $option->option_text !!}</div>
+                                                <div class="test__answer-scale">
+                                                    @foreach (range(1, 10) as $item)
+                                                        <label class="test__label">
+                                                            <input class="test__input"
+                                                                @if ($question->is_required) required @endif
+                                                                type="radio"
+                                                                name="answers[{{ $question->id }}][{{ $option->id }}!]"
+                                                                value="{{ $item }}">
+                                                            <span class="test__value">{{ $item }}</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                @if ($question->type === 'select')
+                                    <div class="test__select-wrapper">
+                                        <select
+                                            class="test__select @if ($question->is_prural) test__select--multiple @endif"
+                                            @if ($question->is_required) required @endif
+                                            name="answers[{{ $question->id }}]{{ $question->is_prural ? '[]' : '' }}"
+                                            @if ($question->is_prural) multiple @endif>
+                                            <option selected disabled>Select an answer...</option>
+                                            @foreach ($question->options as $option)
+                                                <option value="{{ $option->id }}">{{ $option->option_text }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
+                                @if ($question->type === 'text')
+                                    <div class="test__answers test__answers--text">
+                                        @foreach ($question->options as $option)
+                                            <label class="test__label">
+                                                <input class="test__input" @if ($question->is_required) required @endif
+                                                    type="{{ $question->is_prural ? 'checkbox' : 'radio' }}"
+                                                    name="answers[{{ $question->id }}][]" value="{{ $option->id }}">
+                                                <span class="test__value">{!! $option->option_text !!}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                @if ($question->type === 'free_text')
+                                    <div class="test__answers test__answers--free-text">
+                                        <textarea class="test__textarea" @if ($question->is_required) required @endif
+                                            name="answers[{{ $question->id }}][{{ $question->id }}]"></textarea>
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    <button type="submit" class="button">
+                        <span class="button__text">Complete the test</span>
+                    </button>
                 </div>
-
-                @if ($question->type === 'strange_check')
-                <div class="test__answer flex">
-                    @foreach ($question->options as $option)
-                    <div class="flex_unrow">
-                        <div class="text-mark">
-                            {!! $option->option_text !!}
-                        </div>
-
-                        @foreach (range(1, 10) as $item)
-                        <label class="test__label">
-                            <input class="test__input" @if ($question->is_required === 1) required @endif
-                            type="radio" name="answers[{{$question->id }}][{{$option->id}}!]"
-                            value="{{$item}}">
-                            <span class="test__text">{{$item}}</span>
-                        </label>
-
-                        @endforeach
-                    </div>
-                    @endforeach
-                </div>
-                @endif
-
-                @if ($question->type === 'select')
-                @if ($question->is_prural)
-                <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input-prural-select" @if ($question->is_required === 1) required @endif
-                    name="answers[{{$question->id}}][]" multiple>
-                    @else
-                    <select id="{{ isset($question->question_id) ? $question->question_id : $question->question_text }}" class="test__input" @if ($question->is_required === 1) required @endif
-                        name="answers[{{ $question->id }}][{{ $question->id }}]">
-                        @endif
-                        <option selected disabled>Select an answer..</option>
-                        @foreach ($question->options as $option)
-                        <option value="{{ $option->id }}">{{ $option->option_text }}</option>
-                        @endforeach
-                    </select>
-                    @elseif ($question->type === 'text')
-                    @if ($question->is_prural)
-                    <div class="test__answer">
-                        @foreach ($question->options as $option)
-                        <label class="test__label">
-                            <input class="test__input" @if ($question->is_required === 1) required @endif
-                            type="checkbox" name="answers[{{ $question->id }}][]"
-                            value="{{ $option->id }}">
-                            <span class="test__text">{!! $option->option_text !!}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                    @else
-                    <div class="test__answer">
-                        @foreach ($question->options as $option)
-                        <label class="test__label">
-                            <input class="test__input" @if ($question->is_required === 1) required @endif
-                            type="radio" name="answers[{{ $question->id }}][]"
-                            value="{{ $option->id }}">
-                            <span class="test__text">{!! $option->option_text !!}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                    @endif
-                    @elseif ($question->type === 'free_text')
-                    <div class="example">
-                        <div class="test__answer">
-                            <textarea class="test__input-area" @if ($question->is_required === 1) required @endif
-                                    name="answers[{{ $question->id }}][{{ $question->id }}]"></textarea>
-                        </div>
-                    </div>
-                    @endif
             </div>
-            @endforeach
         </div>
-        <button type="submit" class="btn">
-            <p>Complete the test</p>
-        </button>
-    </div>
-</form>
+    </form>
+@endsection

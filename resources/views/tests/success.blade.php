@@ -1,6 +1,10 @@
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('css/finish.css') }}" rel="stylesheet">
+@extends('layouts.app')
 
-<div class="container">
-    <p class="finish">Thank you for taking our test!</p>
-</div>
+@section('title', 'Finish Test')
+
+@section('content')
+    <div class="finish-page__container">
+        <p class="finish-page__message">Thank you for taking our test!</p>
+        <a href="#" class="finish-page__button">Return to Home</a>
+    </div>
+@endsection
